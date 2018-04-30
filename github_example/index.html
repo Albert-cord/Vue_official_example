@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>github_example</title>
+    </head>
+    <body>
+        <div class="demo">
+            <h1>Latest Vue.js Commits</h1>
+            <template v-for="branch in branches">
+                <input
+                :id="branch"
+                :value="branch"
+                v-model="currentBranch"
+                type="radio" name="branch">
+                <label :for="branch">{{ branch }}</label>
+            </template>
+            <p>vuejs/vue@{{ currentBranch }}</p>
+            <ul>
+                <li v-for="record in commits">
+                    <a :href="record.html_url" target="_blank" class="commit">{{ record.sha.slice(0, 7) }}</a>
+                    - <span class="">{{ record.commit.message | truncate }}</span><br>
+                    by <span><a :herf="record.author.html_url" target="">{{ record.commit.author.name }}</a></span>
+                    at <span>{{ record.commit.author.date | formatDate }}</span>
+                </li>
+            </ul>
+        </div>
+        <script src="node_modules\vue\dist\vue.min.js"></script>
+
+        <script src="js\index.js"></script>
+
+    </body>
+</html>

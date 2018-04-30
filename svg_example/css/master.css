@@ -1,0 +1,9 @@
+circle {
+    fill: transparent;
+    stroke: #999;
+}
+
+polygon {
+    fill: #42b983;
+    opacity: .75;
+}

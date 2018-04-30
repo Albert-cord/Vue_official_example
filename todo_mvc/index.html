@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>An todoLIst</title>
+        <link rel="stylesheet" href="css/master.css">
+    </head>
+    <body>
+        <div class="todo-demo">
+            <h1> todos</h1>
+            <input
+                class="todo-input"
+                autofocus autocomplete="off"
+                type="text"
+                placeholder="what needs to be done ?"
+                v-model="newTodo"
+                @keyup.enter="addTodo(newTodo)"
+                @keyup.esc="cancelAdd"
+                >
+                <div class="todo-list" v-show="filterTodos.length">
+                  <ul class="todo-items">
+                      <input
+                      class="toggle-all"
+                      type="checkbox"
+                      v-model="allDone">
+                      <li
+                            v-for="(todo, index) in filterTodos">
+                        <div class="" v-show="!todo.editTodoStatu">
+                          <label @dblclick="editTodo(todo)" :class="{ complete: todo.complete, editing: todo.value == editTodoValue}">{{ todo.value }}</label>
+                          <button  class="destroy" @click="removeTodo(todo)"></button>
+                        </div>
+                          <input type="checkbox" class="toggle" v-model="todo.complete">
+                            <input v-show="todo.editTodoStatu"
+                                class="edit-todo"
+                                v-todo-focus="todo.value === editTodoValue"
+                                type="text"
+                                v-model="todo.editTodoValue"
+                                @keyup.esc="cancelEdit(todo)"
+                                @blur="doneEdit(todo)"
+                                @keyup.enter="doneEdit(todo)"
+                                >
+                    </li>
+
+                  </ul>
+              </div>
+             <!-- <div> -->
+                  <footer class="footer" v-if="todos.length">
+                      <span class="todo-count" v-model="filterTodos.length"><strong>{{ remaining }}</strong> {{ remaining | isplurality }} left</span>
+                      <span class="router">
+                          <a href="#/All" :class="{ selected: visibility == 'All' }">All</a>
+                          <a href="#/Active" :class="{ selected: visibility == 'Active' }" >Active</a>
+                          <a href="#/Complete" :class="{ selected: visibility == 'Complete' }">Completed</a>
+                      </span>
+                      <button class="clear-completed" v-show="remaining != todos.length" @click="removeComplete">Clear Completed</button>
+
+                  </footer>
+
+                    <!-- <span><router-link to="/">/</router-link></span>
+                    <span><router-link to="/Active">/</router-link></span>
+                    <span><router-link to="/Complete">/</router-link></span>
+                    <router-link tag="span" to="/All" :event="['mousedown', 'touchstart']">
+                        <a>/All</a>
+                    </router-link>
+                    <router-view class="view"></router-view> -->
+                    <footer class="info">
+                        <p>Double-click to edit a todo</p>
+                        <p>Written by <a href="https://github.com/Albert-cord"> Albert-cord</a></p>
+                        <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+                    </footer>
+          <!-- </div> -->
+
+    </div>
+        <script src="node_modules\vue\dist\vue.min.js"></script>
+        <script src="node_modules\vue-router\dist\vue-router.min.js"></script>
+        <script src="js\index.js"></script>
+    </body>
+</html>

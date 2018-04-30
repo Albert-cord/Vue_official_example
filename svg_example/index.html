@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>An svg example</title>
+        <link rel="stylesheet" href="css/master.css">
+    </head>
+    <body>
+        <script type="x/template" id="polygraph-template">
+            <g>
+                <polygon :points="points"></polygon>
+                <circle cx="100" cy="100" r="100"></circle>
+                <axis
+                    v-for="(stat, index) in stats"
+                    :stat="stat"
+                    :index="index"
+                    :total="stats.length">
+                </axis>
+            </g>
+        </script>
+
+        <script type="x/template" id="axis-template">
+            <text :x="point.x" :y="point.y">{{ stat.label }}</text>
+        </script>
+
+        <div class="" id="svg">
+            <svg width="200" height="200">
+                <polygraph :stats="stats"></polygraph>
+            </svg>
+
+            <div class="" v-for="stat in stats">
+                <label for="">{{ stat.label }}</label>
+                <input type="range" min="0" max="100" v-model="stat.value">
+                <span>{{ stat.value }}</span>
+                <button type="button" name="button" class="remove" @click="remove(stat)">delete</button>
+            </div>
+            <form class="" action="index.html" method="post" id="add">
+                <input type="text" name="newlabel" v-model="newLabel">
+                <button type="button" name="button" @click="add">Add a stat</button>
+            </form>
+            <pre id="raw">{{ stats }}</pre>
+        </div>
+        <script src="node_modules\vue\dist\vue.min.js"></script>
+
+        <script src="js\index.js"></script>
+
+    </body>
+</html>

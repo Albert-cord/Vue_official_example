@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>An tree view</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <script type="text/x-template" id="item">
+            <li>
+                <!-- <p>(You can double click on an item to turn it into a folder.)</p> -->
+
+                <div
+                    :class="{bold: isFolder}"
+                    @click="toggle"
+                    @dbclick="changeType">
+                    {{ model.name }}
+                    <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
+                </div>
+                    <ul v-show="open" v-if="isFolder">
+                    <itemtree
+                        class="item"
+                        v-for="(model, index) in model.children"
+                        :model="model"
+                        :key="index"
+                        >
+                    </itemtree>
+                    <li class="add" @click="addChild">+</li>
+                </ul>
+            </li>
+        </script>
+        <p>(You can double click on an item to turn it into a folder.)</p>
+        <ul id="demo">
+            <p>(You can double click on an item to turn it into a folder.)</p>
+
+            <itemtree
+                class="item"
+                :model="treeData">
+                <!-- <p>(You can double click on an item to turn it into a folder.)</p> -->
+
+            </itemtree>
+        </ul>
+        <script src="node_modules\vue\dist\vue.min.js"></script>
+
+        <script src="js\index.js"></script>
+
+    </body>
+</html>

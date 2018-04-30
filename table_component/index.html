@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>An table component</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <script type="text/x-template" id="demo-grid">
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="key in columns"
+                            @click="sortBy(key)"
+                            :class="{ active: sortKey == key }">
+                        {{ key || capitalize }}
+                        <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="data in filteredData">
+                        <td v-for="key in columns">
+                        {{ data[key] }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+
+        <div id="demo">
+            <form id="search">
+                Search <input type="text" v-model="queryString" value="">
+            </form>
+            <demotable
+                :data="gridData"
+                :columns="gridColumns"
+                :filter-key="queryString">
+            </demotable>
+        </div>
+        <script src="node_modules\vue\dist\vue.min.js"></script>
+        <script src="js\index.js"></script>
+    </body>
+</html>

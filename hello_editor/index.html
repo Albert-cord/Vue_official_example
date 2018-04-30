@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Hello Editor</title>
+        <!-- <link rel="stylesheet" href="/css/master.css"> -->
+    </head>
+    <body>
+        <div class="editor">
+            <textarea :value="input" @input="update" name="name" rows="8" cols="80"></textarea>
+            <!-- <input v-html="marked" name="" value=""> -->
+            <div v-html="marked">
+
+            </div>
+        </div>
+    <script src="node_modules\vue\dist\vue.min.js"></script>
+    <!-- <script src="node_modules\lodash\fp\__.js"></script> -->
+    <script src="js\index.js"></script>
+
+    </body>
+</html>
